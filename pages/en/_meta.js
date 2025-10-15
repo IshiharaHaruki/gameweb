@@ -10,6 +10,11 @@ export default {
     type: "menu",
     icon: "material-symbols:category",
     items: {
+      action: {
+        title: "Action Games",
+        icon: "material-symbols:flash-on",
+        href: "/en/games/action",
+      },
       fighting: {
         title: "分类页面示例",
         icon: "material-symbols:sports-martial-arts",

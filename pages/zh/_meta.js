@@ -6,19 +6,24 @@ export default {
     href: "/en",
   },
   categories: {
-    title: "Categories",
+    title: "分类",
     type: "menu",
     icon: "material-symbols:category",
     items: {
+      action: {
+        title: "动作游戏",
+        icon: "material-symbols:flash-on",
+        href: "/zh/games/action",
+      },
       fighting: {
         title: "分类页面示例",
         icon: "material-symbols:sports-martial-arts",
-        href: "/en/games/category-1",
+        href: "/zh/games/category-1",
       },
       arcade: {
         title: "分类页面示例",
         icon: "material-symbols:gamepad",
-        href: "/en/games/category-2",
+        href: "/zh/games/category-2",
       },
     },
   },

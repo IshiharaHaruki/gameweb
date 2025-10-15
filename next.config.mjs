@@ -11,13 +11,9 @@ const withNextra = nextra({
 });
 
 export default withNextra({
-  // 如果启用多语言，则使用 i18nConfig，否则不启用
-  i18n: SITE_CONFIG.features.i18n
-    ? {
-        ...SITE_CONFIG.i18nConfig,
-        localeDetection: true,
-      }
-    : undefined,
+  // 注意：静态导出（output: "export"）不支持 Next.js 原生 i18n
+  // 本模板使用文件夹路由实现多语言（/en/, /zh/）
+  // i18n 配置仅用于主题系统，不传递给 Next.js
   output: "export",
   images: {
     unoptimized: true,
