@@ -325,10 +325,6 @@ export function Navbar({ meta }: NavbarProps) {
                     </div>
                 </nav>
             </header>
-            <div className="mt-16 md:mt-20 border-b border-theme-border bg-theme-bg-primary/50 dark:bg-dark-secondary/50 backdrop-blur-md">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                </div>
-            </div>
         </>
     )
 } 

@@ -29,13 +29,16 @@ export default function Layout({ children, pageOpts, themeConfig: nextraThemeCon
                 <Head frontMatter={frontMatter} pageMap={pageMap} />
                 <div className="min-h-screen bg-gray-100">
                     <Navbar meta={meta} />
-                    <LayoutComponent
-                        frontMatter={frontMatter}
-                        themeConfig={nextraThemeConfig}
-                        pageMap={pageMap}
-                    >
-                        {children}
-                    </LayoutComponent>
+                    {/* 为固定的 Navbar 添加顶部间距 */}
+                    <div className="pt-16 md:pt-20">
+                        <LayoutComponent
+                            frontMatter={frontMatter}
+                            themeConfig={nextraThemeConfig}
+                            pageMap={pageMap}
+                        >
+                            {children}
+                        </LayoutComponent>
+                    </div>
                     <Footer themeConfig={nextraThemeConfig} />
                 </div>
             </ThemeProvider>
