@@ -19,10 +19,10 @@ export function DefaultLayout({ children, frontMatter }: DefaultLayoutProps) {
 
     return (
         <main className="min-h-screen bg-theme-bg-primary dark:bg-[#1a1a1a]">
-            <div className="max-w-5xl mx-auto px-4 py-6">
+            <div className="max-w-5xl mx-auto px-4 pt-32 md:pt-36 pb-6">
                 {/* 游戏播放器 */}
                 {gameUrl && (
-                    <div className="mb-6">
+                    <div className="mb-32">
                         <GameFrame
                             src={gameUrl}
                             title={frontMatter.title || 'Game'}
@@ -30,6 +30,8 @@ export function DefaultLayout({ children, frontMatter }: DefaultLayoutProps) {
                         />
                     </div>
                 )}
+
+                
 
                 {/* 文章内容区域 */}
                 <div className="bg-white dark:bg-[#242424] rounded-xl shadow-sm">

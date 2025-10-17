@@ -30,7 +30,7 @@ export default function Layout({ children, pageOpts, themeConfig: nextraThemeCon
                 <div className="min-h-screen bg-gray-100">
                     <Navbar meta={meta} />
                     {/* 为固定的 Navbar 添加顶部间距 */}
-                    <div className="pt-16 md:pt-20">
+                    <div className="">
                         <LayoutComponent
                             frontMatter={frontMatter}
                             themeConfig={nextraThemeConfig}

@@ -133,8 +133,9 @@ export function Navbar({ meta }: NavbarProps) {
 
     return (
         <>
-            <header className="fixed top-0 left-0 right-0 z-50">
-                <nav className="bg-white/80 dark:bg-dark-secondary/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+            <header className="top-0 left-0 right-0 z-50">
+                <nav className="h-20
+ bg-white/80 dark:bg-dark-secondary/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
                     <div className="flex h-16 md:h-20 items-center">
                         {/* Logo 区域 */}
                         <div className="flex-shrink-0 px-4 sm:px-6 lg:px-8">

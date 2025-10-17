@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import type { PageMapItem } from 'nextra';
 import { GameCard } from '../components/GameCard';
 import { Breadcrumb } from '../components/Breadcrumb';
+import { CategorySidebar } from '../components/CategorySidebar';
 import { getGamesInCurrentDirectory } from '../utils/getGamesByCategory';
+import { getCategories } from '../utils/getCategories';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import { useRouter } from 'nextra/hooks';
@@ -21,6 +23,7 @@ export function CategoryLayout({ children, pageMap }: CategoryLayoutProps) {
     const { query } = router;
     const currentPage = Number(query.page) || 1;
     const [isClient, setIsClient] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     const pageSize = 12;
 
     useEffect(() => {
@@ -36,7 +39,10 @@ export function CategoryLayout({ children, pageMap }: CategoryLayoutProps) {
     // });
 
     const allGames = getGamesInCurrentDirectory(pageMap, router.pathname, locale);
-    
+
+    // 获取所有分类（用于 Sidebar）
+    const categories = getCategories(pageMap, locale);
+
     // 计算分页
     const totalGames = allGames.length;
     const totalPages = Math.ceil(totalGames / pageSize);
@@ -65,13 +71,63 @@ export function CategoryLayout({ children, pageMap }: CategoryLayoutProps) {
 
     return (
         <main className="min-h-screen bg-theme-bg-primary dark:bg-[#1a1a1a]">
-            <div className="max-w-7xl mx-auto px-4 py-6">
-                <Breadcrumb />
+            {/* 移动端汉堡菜单按钮 */}
+            <button
+                className="fixed top-20 left-4 z-40 lg:hidden p-3 bg-[#DAA520] dark:bg-[#B8860B] text-white rounded-lg shadow-lg hover:bg-[#C8941F] transition-colors"
+                onClick={() => setSidebarOpen(true)}
+                aria-label="Open sidebar"
+            >
+                <Icon icon="mdi:menu" className="w-6 h-6" />
+            </button>
+
+            {/* 移动端 Sidebar 抽屉 */}
+            {sidebarOpen && (
+                <div className="fixed inset-0 z-50 lg:hidden">
+                    {/* 半透明遮罩 */}
+                    <div
+                        className="absolute inset-0 bg-black/50"
+                        onClick={() => setSidebarOpen(false)}
+                    />
+                    {/* 抽屉内容 */}
+                    <aside className="absolute left-0 top-0 bottom-0 w-[280px] bg-[#DAA520] dark:bg-[#B8860B] overflow-y-auto shadow-2xl transform transition-transform">
+                        <CategorySidebar
+                            categories={categories}
+                            currentPath={router.asPath}
+                            onClose={() => setSidebarOpen(false)}
+                        />
+                    </aside>
+                </div>
+            )}
+
+            {/* 三区布局容器 */}
+            <div className="flex w-full pt-32 md:pt-36">
+                {/* 左侧广告空白区 - 仅大屏显示 */}
+                <div
+                    className="hidden xl:block w-[160px] 2xl:w-[200px] flex-shrink-0"
+                    id="left-ad-zone"
+                    aria-label="Advertisement space"
+                >
+                    {/* 空白区域，供 AdSense 自动填充 */}
+                </div>
+
+                {/* 中间内容区 - Sidebar + Main */}
+                <div className="flex-1 max-w-7xl mx-auto flex">
+                    {/* Sidebar - 桌面固定显示 */}
+                    <aside className="hidden lg:block w-[280px] flex-shrink-0 bg-[#DAA520] dark:bg-[#B8860B] sticky top-24 h-[calc(100vh-6rem)] overflow-y-auto shadow-lg">
+                        <CategorySidebar
+                            categories={categories}
+                            currentPath={router.asPath}
+                        />
+                    </aside>
+
+                    {/* Main Content */}
+                    <div className="flex-1 min-w-0 px-4 lg:px-6 pb-12">
+                        <Breadcrumb />
 
                 {isClient && (
                     <>
                         {games.length > 0 ? (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
                                 {games.map((game) => (
                                     <GameCard
                                         key={game.slug}
@@ -150,10 +206,24 @@ export function CategoryLayout({ children, pageMap }: CategoryLayoutProps) {
                     </>
                 )}
 
-                <div className="prose mt-8">
-                    {children}
+                        <div className="prose mt-8">
+                            {children}
+                        </div>
+                    </div>
+                    {/* Main Content 结束 */}
+                </div>
+                {/* 中间内容区结束 */}
+
+                {/* 右侧广告空白区 - 仅大屏显示 */}
+                <div
+                    className="hidden xl:block w-[160px] 2xl:w-[200px] flex-shrink-0"
+                    id="right-ad-zone"
+                    aria-label="Advertisement space"
+                >
+                    {/* 空白区域，供 AdSense 自动填充 */}
                 </div>
             </div>
+            {/* 三区布局容器结束 */}
         </main>
     );
 } 

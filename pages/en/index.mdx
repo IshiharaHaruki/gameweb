@@ -11,173 +11,30 @@ categories:
 breadcrumb: false
 ---
 
-# Featured Games 英文页面只是示例，不做具体翻译了
 
+# Steal a Brainrot
 
-单语言版本：https://aab6a5a4.game-launch-boost.pages.dev/
+Welcome to **Steal a Brainrot**! This is an exciting action game that will test your skills and reflexes.
 
-Welcome to Game Launch Boost! Here you can find a curated collection of amazing games across different categories.
+## How to Play
 
-## Featured Layout Configuration Guide
+- Use your keyboard/mouse to control the character
+- Complete objectives to progress through levels
+- Collect items and avoid obstacles
+- Challenge yourself to get the highest score!
 
-The Featured layout displays different game categories through the `categories` configuration. Each category shows up to 20 games in a carousel format.
-The corresponding game card carousel component is located at src/components/GameCarousel.tsx
+## Features
 
-### Categories Configuration
+- **Fast-paced gameplay** - Quick reactions are key
+- **Multiple levels** - Progress through increasingly difficult challenges
+- **High score system** - Compete for the best scores
+- **Smooth controls** - Responsive and intuitive gameplay
 
-Use the `categories` array in the frontmatter to specify which game categories to display:
+## Tips & Tricks
 
-```yaml
-categories:
-    - games/fighting     # 格斗游戏分类
-    - games/arcade       # 街机游戏分类
-    - games/popular      # 热门游戏（自动收集）
-    - games/new         # 最新游戏（自动收集）
-```
+1. **Stay focused** - Keep your eyes on the objective
+2. **Practice makes perfect** - Play multiple times to improve
+3. **Learn patterns** - Recognize and adapt to game mechanics
+4. **Take breaks** - Don't overdo it, rest when needed
 
-建议文件结构如下：
-
-```
-pages/
-├── en/                    # 英文内容
-│   ├── games/             # 游戏根目录
-│   │   ├── fighting/      # 分类目录
-│   │   │   ├── game1.mdx  # 游戏页面
-│   │   │   └── game2.mdx  # 子分类
-│   │   ├── arcade/        # 分类目录
-│   │   │   └── game.mdx   # 游戏页面,不需要配置 layout，使用默认布局
-│   │   ├── sports/        # 分类目录
-│   │   │   └── game.mdx   # 游戏页面,不需要配置 layout，使用默认布局  
-│   │   ├── fighting.mdx   # 分类页面,使用 Category 布局
-│   │   └── arcade.mdx     # 分类页面,使用 Category 布局
-│   ├── index.mdx          # 首页，建议使用 Featured 布局
-│   └── download.mdx       # 下载页面，这里是一个 landing 布局的示例
-└── zh/                    # 中文部分省略
-    └── ...                # 文件夹省略
-```
-
-### Category Path Guidelines
-
-1. **Path Format Requirements**:
-- Paths are case-sensitive
-
-2. **Subfolder Processing**:
-- The system automatically traverses all subfolders under specified categories
-- For example: configuring `games/fighting` includes:
-  - `games/fighting/*.mdx`
-  - `games/fighting/street/*.mdx`
-  - `games/fighting/versus/*.mdx`
-  - And deeper subfolders
-
-3. **Game File Requirements**:
-- Only collects `.mdx` files
-- Does not collect `index.mdx` files
-- Files must contain valid frontMatter
-
-### Important Notes
-
-1. Category paths must start with `games/`
-2. Games are recursively collected from all subfolders
-3. Each category displays up to 20 games, shown in carousels of 4
-4. Game file requirements:
-   - Must be `.mdx` files
-   - Cannot be `index.mdx`
-   - Must contain valid frontMatter (title required)
-5. Category titles are automatically formatted (e.g., 'fighting-games' displays as 'Fighting Games')
-6. Categories with no valid game files will not be displayed
-7. Game card displays:
-   - Title (required)
-   - Description (optional)
-   - Cover image (optional)
-   - Category (optional)
-   - Date (optional)
-
-## Category Directory Structure
-
-Games are organized using a folder structure that supports multiple levels. The basic structure is as follows:
-
-```
-pages/
-├── en/                    # 英文内容
-│   ├── games/            # 游戏根目录
-│   │   ├── fighting/     # 格斗游戏分类
-│   │   │   ├── game1.mdx # 游戏页面
-│   │   │   └── street/   # 子分类
-│   │   │       └── game2.mdx
-│   │   ├── arcade/      # 街机游戏分类
-│   │   │   └── index.mdx
-│   │   └── sports/      # 体育游戏分类
-│   │       └── index.mdx
-│   └── index.mdx        # 当前页面
-└── zh/                   # 中文内容
-    └── games/           # 对应的中文游戏目录
-```
-
-### Supported Category Structure
-
-1. **Basic Categories**:
-- `games/fighting` - Fighting Games
-- `games/arcade` - Arcade Games  
-- `games/sports` - Sports Games
-- `games/puzzle` - Puzzle Games
-- `games/action` - Action Games
-
-2. **Subcategory Examples**:
-- `games/fighting/street` - Street Fighting
-- `games/fighting/versus` - Versus Fighting
-- `games/arcade/retro` - Retro Arcade
-- `games/sports/football` - Football Games
-
-
-### Category Page Configuration
-
-Each category folder can contain an `index.mdx` file to configure the category page:
-
-```yaml
----
-title: Fighting Games
-layout: category
-description: Explore our fighting games collection
-cover: /images/fighting-games.jpg
----
-```
-
-### 在 Featured 布局中使用分类
-
-可以在 frontmatter 中指定任意层级的分类路径：
-
-```yaml
-categories:
-    - games/fighting           # 所有格斗游戏
-    - games/fighting/street    # 仅街机格斗游戏
-    - games/arcade/retro       # 复古街机游戏
-```
-### Important Notes
-
-1. Category paths must start with `games/`
-2. Supports unlimited levels of subcategories
-3. Each category folder should have an `index.mdx`
-4. Category names are automatically formatted (e.g., 'fighting-games' displays as 'Fighting Games')
-5. Subcategories inherit parent category configurations
-
-## Adding New Games
-
-To add a new game, follow these steps:
-
-1. Choose or create an appropriate category folder
-2. Create a new `.mdx` file in the category folder
-3. Configure the game's frontmatter
-4. Add game description and content
-
-Example:
-```yaml
----
-title: Street Fighter
-layout: default
-description: Classic fighting game
-game: https://example.com/street-fighter
-cover: /images/street-fighter.jpg
-date: 2024-03-20
-tags: [fighting, arcade, classic]
----
-```
+Enjoy the game and have fun! 🎮

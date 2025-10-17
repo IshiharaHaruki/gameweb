@@ -10,7 +10,11 @@ interface BreadcrumbItem {
 
 export function Breadcrumb() {
     const router = useRouter()
-    const { asPath, locale } = router
+    const { asPath } = router
+
+    // 从路径中提取实际的 locale，避免 undefined 问题
+    const pathLocale = asPath.split('/')[1]
+    const locale = pathLocale === 'en' || pathLocale === 'zh' ? pathLocale : 'en'
 
     // 生成面包屑路径
     const generateBreadcrumb = (): BreadcrumbItem[] => {

@@ -57,6 +57,7 @@ export interface FrontMatter {
   slug?: string;
   locale?: string;
   breadcrumb?: boolean;
+  icon?: string;
 }
 
 export interface PageData {
